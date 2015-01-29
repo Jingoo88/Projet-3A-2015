@@ -51,14 +51,19 @@ class Cauchy:
 
 if __name__ == '__main__':
 	
-	x = Cauchy(10000)
+	x = Cauchy(100000)
 	x.get_cauchy_randoms()
+	sample = x.sample[x.sample >-10]
+	sample = sample[sample < 10]
+	excluded = x.sample.shape[0] - sample.shape[0]
+	t= "Number of values excluded = %i"%excluded
 
 
-	n, bins, patches = plt.hist(x.sample,2000, normed=1, facecolor='g', alpha=0.75)
-	plt.xlabel('Smarts')
+	n, bins, patches = plt.hist(sample,200, normed=1, facecolor='g', alpha=0.75)
+	plt.xlabel("Samples")
 	plt.ylabel('Probability')
-	plt.title('Histogram of IQ')
-	plt.axis([-100, 100, 0, 0.07])
+	plt.text(-7, .4, t )
+	plt.title('Histogram of Cauchy generation')
+	plt.axis([-10, 10, 0, 0.5])
 	plt.grid(True)
 	plt.show()
